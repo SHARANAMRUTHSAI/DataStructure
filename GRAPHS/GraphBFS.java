@@ -13,31 +13,31 @@ class GraphBFS {
         ArrayList<Integer> visitedOrder = new ArrayList<>();
 
 
-		for(int i = 1; i < graph.size(); i++) {
+
+        for(int i = 1; i< graph.size(); i++) {
+
+         
+        // select a node only it is not explored
+        if(!visited[i]) {
+        	fifo.add(i);
+        } else {
+        	continue;
+        }
 
 
-			//check if node is visited 
-			if(!visited[i]) {
-				visited[i] = true;
-				visitedOrder.add(i); 
-			}
+        // Node exploration here.
+        while(!fifo.isEmpty()) {
+        	int exploreNode = fifo.remove();
+        	visited[exploreNode] = true;
+        	visitedOrder.add(exploreNode);
+        	for(int neighbourNode: graph.get(exploreNode)) {
+        		if(!visited[neighbourNode]) {
+        			fifo.add(neighbourNode);
+        		}
+        	}
+        }
 
-            // Add all connecting nodes to FIFO
-		    for(int node: graph.get(i)) {
-					fifo.add(node);
-			}
-
-            // Peek every element from FIFO and visit them.
-			while(fifo.peek() != null) {
-				int node = fifo.remove();
-				if(!visited[node]) {
-					visitedOrder.add(node);
-					visited[node] = true;
-				}
-			}
-			System.out.println(visitedOrder);
-
-		}
+        }
 		System.out.println(visitedOrder);
 	}
 
@@ -49,13 +49,13 @@ class GraphBFS {
 		ArrayList<ArrayList<Integer>> graph = new ArrayList<ArrayList<Integer>>();
 		graph.add(new ArrayList<>(Arrays.asList(0)));
 		graph.add(new ArrayList<>(Arrays.asList(2,3)));
-		graph.add(new ArrayList<>(Arrays.asList(1,6)));
+		graph.add(new ArrayList<>(Arrays.asList(1,5,6)));
 		graph.add(new ArrayList<>(Arrays.asList(1)));
 		graph.add(new ArrayList<>(Arrays.asList(5)));
 		graph.add(new ArrayList<>(Arrays.asList(2,4)));
 		graph.add(new ArrayList<>(Arrays.asList(2)));
 		graph.add(new ArrayList<>(Arrays.asList(8)));
-		graph.add(new ArrayList<>(Arrays.asList(7)));
+		graph.add(new ArrayList<>(Arrays.asList(7,9)));
 		graph.add(new ArrayList<>(Arrays.asList(8)));
 
 		graphBFS.traverseBFS(graph);
