@@ -2,7 +2,7 @@ import java.util.*;
 
 class GraphBFS {
 
-
+	// BFS
 
 	public void traverseBFS(final ArrayList<ArrayList<Integer>> graph) {
 
