@@ -6,30 +6,28 @@ class GraphDFS {
 
 		boolean[] visited = new boolean[graph.size() + 1];
 
-
 		ArrayList<Integer> vistedOrder = new ArrayList<>();
 
 
 		for(int i = 1; i < graph.size(); i++) {
-			dft(visited, i, graph, vistedOrder);
-
+			if (!visited[i]) {
+				dft(visited, i, graph, vistedOrder);
+			}
 		}
-
+		
 		System.out.println(vistedOrder);
-
 	}
 
 	public void dft(boolean[] visited, int i, final ArrayList<ArrayList<Integer>> graph, final ArrayList<Integer> vistedOrder) {
 
-		// Imp: Return if you have seen the node i.e. DFS in case of tree it is null.
-		if(!visited[i]) {
-			visited[i] = true;
-			vistedOrder.add(i);
-		} else {
-			return;
-		}
+		// Imp: Return if you have seen the node in DFS, In case of tree it is null.
+		visited[i] = true;
+		vistedOrder.add(i);
+
 		for(int node: graph.get(i)) {
-			dft(visited, node, graph, vistedOrder);
+			if (!visited[node]) {
+				dft(visited, node, graph, vistedOrder);
+			}
 		}
 
 	}
